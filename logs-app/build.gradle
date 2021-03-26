@@ -1,0 +1,19 @@
+plugins {
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '6.1.0'
+}
+
+dependencies {
+    runtimeOnly project(':logs-core')
+    runtimeOnly project(':logs-adapters:file-pattern')
+    runtimeOnly project(':logs-adapters:log-explorer')
+}
+
+application {
+    mainClassName = 'gma.logs.app.LogsAppKt'
+}
+
+shadowJar {
+    zip64 = true
+    mergeServiceFiles()
+}

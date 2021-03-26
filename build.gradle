@@ -1,0 +1,57 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version "$kotlin_version" apply false
+    id 'org.openjfx.javafxplugin' version "$openjfx_plugin_version" apply false
+}
+
+allprojects {
+    group 'gma.logs.app'
+    version '1.0-SNAPSHOT'
+}
+
+subprojects {
+
+    repositories {
+        mavenCentral()
+        mavenLocal() // for log-explorer
+    }
+
+    pluginManager.withPlugin('org.jetbrains.kotlin.jvm') {
+
+        dependencies {
+            implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+            implementation 'org.jetbrains.kotlin:kotlin-reflect'
+            implementation "io.github.microutils:kotlin-logging-jvm:$kotlin_logging_version"
+            implementation("no.tornado:tornadofx:$tornadofx_version") {
+                // TornadoFX Rest API not used:
+                exclude group: 'org.glassfish', module: 'javax.json'
+            }
+
+            testImplementation "org.junit.jupiter:junit-jupiter-api:$junit_version"
+            testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junit_version"
+        }
+
+        test {
+            useJUnitPlatform()
+        }
+
+        compileKotlin {
+            kotlinOptions {
+                jvmTarget = java_version
+            }
+        }
+
+        compileTestKotlin {
+            kotlinOptions {
+                jvmTarget = java_version
+            }
+        }
+    }
+
+    pluginManager.withPlugin('org.openjfx.javafxplugin') {
+        javafx {
+            version = openjfx_version
+            modules = ['javafx.controls', 'javafx.graphics']
+        }
+    }
+
+}

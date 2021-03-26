@@ -1,0 +1,10 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm'
+    id 'org.openjfx.javafxplugin'
+}
+
+dependencies {
+    implementation project(':logs-core')
+
+    implementation 'com.tsquare.log-explorer:log-explorer-app:1.0.0'
+}

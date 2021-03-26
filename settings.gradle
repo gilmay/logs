@@ -1,0 +1,6 @@
+rootProject.name = 'logs'
+
+include 'logs-core'
+include 'logs-app'
+include 'logs-adapters:file-pattern'
+include 'logs-adapters:log-explorer'
